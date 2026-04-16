@@ -10,7 +10,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(23)
 	}
 }
 
@@ -25,11 +25,11 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
-	finalizedBy jacocoTestReport
+	finalizedBy tasks.named('jacocoTestReport')
 }
 
-jacocoTestReport {
-	dependsOn test
+tasks.named('jacocoTestReport') {
+	dependsOn tasks.named('test')
 	reports {
 		xml.required = true
 		html.required = true
